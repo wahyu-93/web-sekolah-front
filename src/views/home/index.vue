@@ -1,5 +1,6 @@
 <template>
     <div id="home">
+        
         <!-- header -->
         <Header />
 
@@ -19,7 +20,7 @@
                             </h4>
                         </div>
 
-                        <div v-if="post.length > 0" class="row">
+                        <div v-if="posts.length > 0" class="row">
                             <div class="col-md-4 mb-4" v-for="post in posts" :key="post.id">
                                 <div class="card h-100 shadow-sm border-0 rounded-lg">
                                     <div class="card-img">
@@ -63,7 +64,7 @@
                             </h4>
                         </div>
                         
-                        <div v-if="photos.lengh >0" class="row">
+                        <div v-if="photos.length > 0" class="row">
                             <div class="col-md-6 mb-4" v-for="photo in photos" :key="photo.id">
                                 <div class="card h-100 shadow-sm border-0 rounded-lg">
                                     <div class="card-img">
@@ -139,7 +140,6 @@
                             </div>
                         </div>
                         <!-- end video setion -->
-
                     </div>
                 </div>
 
@@ -174,14 +174,15 @@
 
                     <div v-else>
                         <div class="row">
-                            <div v-for="">
-
+                            <div v-for="loader in loaders" :key="loader">
+                                <div class="card mb-3 shadow-sm border-0">
+                                    <div class="card-body">
+                                        <FacebookLoader />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
-                                       
                     <!-- end agenda section -->
 
                     <!-- kategori section -->
@@ -192,31 +193,36 @@
                         </h4>
                     </div>
 
-                    <div class="list-group">
-                        <a href="" class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded">
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
-                            OSIS
-                        </a>
+                    <div v-if="categories.length > 0">
+                        <div class="list-group">
+                            <router-link :to="{name: 'detail_category', params: {slug: category.slug}}"
+                                class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded"
+                                v-for="category in categories" :key="category.id">
+                                <i class="fa fa-folder-open" aria-hidden="true"></i>
+                                {{ category.name.toUpperCase() }}
+                            </router-link>
+                        </div>
+                    </div>
 
-                        <a href="" class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded">
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
-                            PRAMUKA
-                        </a>
-
-                        <a href="" class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded">
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
-                            BERITA
-                        </a>
-
-                        <a href="" class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded">
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
-                            INFO
-                        </a>
+                    <div v-else>
+                        <div class="row">
+                            <div v-for="loader in categories_loader" :key="loader">
+                                <div class="card border-0 shadow-sm rounded-lg-mb-3">
+                                    <BulletListLoader />
+                                    {{loader}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- end kategori section -->
                 </div>
             </div>
         </div>
+        <!-- enf main content -->
+
+        <!-- footer -->
+        <Footer />
+        <!-- end footer -->
 
 
     </div>
@@ -271,25 +277,26 @@ export default {
             // get videos
             axios.get('/api/homepage/video')
             .then(response => {
-                posts.value = response.data.data
+                videos.value = response.data.data
             })
 
             // get events
             axios.get('/api/homepage/event')
             .then(response => {
-                posts.value = response.data.data
+                events.value = response.data.data
             })
 
             // get categories
-            axios.get('/api/caegory')
+            axios.get('/api/category')
             .then(response => {
-                posts.value = response.data.data.data
+                categories.value = response.data.data.data
+                console.log(response.data.data.data)
             })
 
             // get photos
             axios.get('/api/homepage/photo')
             .then(response => {
-                posts.value = response.data.data.data
+                photos.value = response.data.data
             })
         });
 

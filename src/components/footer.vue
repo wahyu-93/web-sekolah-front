@@ -16,7 +16,7 @@
 
                     <div v-if="tags.length > 0">
                         <router-link :to="{name: 'detail_tag', params: { slug: tag.slug }}" v-for="tag in tags" :key="tag.id" class="btn btn-sm btn-outline-secondary mb-2">
-                            {{ tag.name.toUppercase()}}
+                            {{ tag.name.toUpperCase()}}
                         </router-link>
                     </div>
                     <div v-else class="text-center">
@@ -67,6 +67,7 @@
                 axios.get('/api/tag')
                     .then(response => {
                         tags.value = response.data.data.data
+                        console.log(response.data.data.data)
                     })
                     .catch(() => {
                         tags.value = [];

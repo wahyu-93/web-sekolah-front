@@ -15,7 +15,7 @@
                     <hr>
 
                     <div v-if="tags.length > 0">
-                        <router-link :to="{name: 'detail_tag', params: { slug: tag.slug }}" v-for="tag in tags" :key="tag.id" class="btn btn-sm btn-outline-secondary mb-2">
+                        <router-link :to="{name: 'detail_tag', params: { slug: tag.slug }}" v-for="tag in tags" :key="tag.id" class="btn btn-sm btn-outline-secondary mb-2 mx-1">
                             {{ tag.name.toUpperCase()}}
                         </router-link>
                     </div>

@@ -102,12 +102,22 @@
 
                     <div v-if="categories.length > 0">
                         <div class="list-group">
-                            <router-link :to="{name: 'detail_event', params:{slug: categories.slug}}" class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded" v-for="categori in categories" :key="categori.id">
+                            <router-link :to="{name: 'detail_event', params:{slug: categori.slug}}" 
+                                class="list-group-item list-group-item-action border-0 shadow-sm mb-2 rounded" 
+                                v-for="categori in categories" :key="categori.id">
                                 <i class="fa fa-folder-open" aria-hidden="true"></i>
                                 {{ categori.name }}
                             </router-link>
                         </div>
                     </div>
+
+                     <div v-else>
+                         <div class="card mb-3 shadow-sm border-0" v-for="loader in categories_loader" :key="loader">
+                            <div class="card-body">
+                               <BulletListLoader />
+                            </div>
+                        </div>
+                    </div>    
                     <!-- end kategori section -->
                 </div>
             </div>
@@ -136,7 +146,7 @@ export default {
         Header,
         Footer,
         FacebookLoader,
-        BulletListLoader
+        BulletListLoader,
     },
     setup(){
         // define state

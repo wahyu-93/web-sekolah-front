@@ -67,7 +67,6 @@
                 axios.get('/api/tag')
                     .then(response => {
                         tags.value = response.data.data.data
-                        console.log(response.data.data.data)
                     })
                     .catch(() => {
                         tags.value = [];

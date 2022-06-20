@@ -45,7 +45,7 @@
                 <div class="col-md-8">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <h3>Judul Agenda</h3>
+                        <h3>{{ event.title }}</h3>
                         <hr>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">

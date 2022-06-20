@@ -34,7 +34,7 @@
         </nav>
         <!-- end breadcrumb -->
 
-         <div class="container-fluid mt-3 mb-5">
+        <div class="container-fluid mt-3 mb-5">
             <div v-if="posts.length > 0" class="row">
                 <div class="col-md-4 mb-4" v-for="post in posts" :key="post.id">
                     <div class="card h-100 shadow-sm border-0 rounded-lg">

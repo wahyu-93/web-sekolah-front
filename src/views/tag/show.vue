@@ -10,7 +10,7 @@
                     BERITA
                 </h1>
 
-                <p class="bd-lead">Berita terbaru tentang SMK Indonesia</p>
+                <p class="bd-lead">{{ tagInfo.message }}</p>
             </div>
         </header>
 

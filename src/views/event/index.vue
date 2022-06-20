@@ -38,7 +38,7 @@
             <div class="container-fluid mt-3 mb-0">
                 <div class="row">
                     <div class="col-md-6" v-for="event in events" :key="event.id">
-                        <a href="" class="text-decoration-none text-dark">
+                        <router-link :to="{name: 'detail_event', params:{slug: event.slug}}" class="text-decoration-none text-dark">
                             <div class="card mb-3 shadow-sm border-0">
                                 <div class="card-body">
                                     <h6>{{ event.title }}</h6>
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -62,13 +62,11 @@
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-md-6 mb-3" v-for="loader in events_loader" :key="loader">
-                        <a href="" class="text-decoration-none text-dark">
-                            <div class="card mb-3 shadow-sm border-0">
-                                <div class="card-body">
-                                    <FacebookLoader />
-                                </div>
+                        <div class="card mb-3 shadow-sm border-0">
+                            <div class="card-body">
+                                <FacebookLoader />
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>

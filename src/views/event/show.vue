@@ -124,7 +124,7 @@ import axios from 'axios'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default {
@@ -144,21 +144,28 @@ export default {
 
         let route = useRoute()
 
-        onMounted(() => {
-            // get event detail
+        const getEventBySlug = () => {
             axios.get(`api/event/${route.params.slug}`)
-                .then(response => {
-                    event.value = response.data.data
-                    console.log(response)
-                })
-                .catch(err => console.log(err))
+            .then(response => {
+                event.value = response.data.data
+                console.log(response)
+            })
+            .catch(err => console.log(err))
+        }
 
+        onMounted(() => {
             // get event list
+            getEventBySlug()
+
             axios.get('api/homepage/event')
-                .then(response => {
-                    events.value = response.data.data
-                })
-                .catch(err => console.log(err))
+            .then(response => {
+                events.value = response.data.data
+            })
+            .catch(err => console.log(err))
+        })
+
+        watch(() => route.params.slug, () => {
+            getEventBySlug()
         })
 
         return {
